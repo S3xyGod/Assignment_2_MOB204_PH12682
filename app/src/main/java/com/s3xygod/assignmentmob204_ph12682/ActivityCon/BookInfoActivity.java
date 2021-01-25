@@ -1,0 +1,105 @@
+ package com.s3xygod.assignmentmob204_ph12682.ActivityCon;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.s3xygod.assignmentmob204_ph12682.R;
+import com.s3xygod.assignmentmob204_ph12682.SQLiteOpenHelper.SachDAO;
+
+ public class BookInfoActivity extends AppCompatActivity {
+     EditText maSach, tenSach, tacgia, nxb, giaban, soluong;
+     SachDAO sachDAO;
+     Spinner spnTheLoaisua;
+     String masua, tensua, tacsua, nxbsua, giasua, sosua, matheloai, maSachk;
+
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setTitle("CHI TIẾT SÁCH");
+         setContentView(R.layout.activity_book_info);
+         tenSach = findViewById(R.id.edTenSachsua);
+         maSach = findViewById(R.id.edMaSachsua);
+         tacgia = findViewById(R.id.edTacGiasua);
+         nxb = findViewById(R.id.edNXBsua);
+         giaban = findViewById(R.id.edGiaBiasua);
+         soluong = findViewById(R.id.edSoLuongsua);
+         TextView text = findViewById(R.id.text);
+//         Typeface type = Typeface.createFromAsset(getAssets(), "fonts/svn-hello_sweets.otf");
+//         text.setTypeface(type);
+         sachDAO = new SachDAO(this);
+         Intent in = getIntent();
+         Bundle k = in.getExtras();
+
+         maSachk = k.getString("MASACH");
+         tensua = k.getString("TENSACH");
+         tacsua = k.getString("TACGIA");
+         nxbsua = k.getString("NXB");
+         giasua = k.getString("GIABIA");
+         sosua = k.getString("SOLUONG");
+
+         maSach.setText(maSachk);
+         tenSach.setText(tensua);
+         tacgia.setText(tacsua);
+         nxb.setText(nxbsua);
+         giaban.setText(giasua);
+         soluong.setText(sosua);
+     }
+
+     public void capsua(View view) {
+         try {
+             if (sachDAO.updateSach(maSachk, maSach.getText().toString(), tenSach.getText().toString(), tacgia.getText().toString(), nxb.getText().toString(), Double.parseDouble(giaban.getText().toString()), Integer.parseInt(soluong.getText().toString())) > 0) {
+                 Toast.makeText(this, "Lưu thành công", Toast.LENGTH_SHORT).show();
+             } else {
+                 Toast.makeText(this, "Lưu thất bại",
+                         Toast.LENGTH_SHORT).show();
+             }
+
+         } catch (Exception ex) {
+             String s = giaban.getText().toString();
+             String t = soluong.getText().toString();
+             if (maSach.getText().length() == 0 || tenSach.getText().length() == 0
+                     || tacgia.getText().length() == 0 || nxb.getText().length() == 0
+                     || giaban.getText().length() == 0 || soluong.getText().length() == 0) {
+                 Toast.makeText(this, "Bạn chưa nhập đầy đủ thông tin ", Toast.LENGTH_SHORT).show();
+             }
+             try {
+                 Double.parseDouble(s);
+                 Integer.parseInt(t);
+             } catch (Exception e) {
+                 Toast.makeText(this, "Kiểm tra định dạng giá bán và số lượng ", Toast.LENGTH_SHORT).show();
+             }
+         }
+     }
+
+     public void quaysua(View view) {
+         finish();
+     }
+
+     @Override
+     public boolean onOptionsItemSelected(MenuItem item) {
+
+         switch (item.getItemId()) {
+             case android.R.id.home:
+                 onBackPressed();
+                 return true;
+             default:
+                 break;
+         }
+         return super.onOptionsItemSelected(item);
+     }
+
+     public void ADDHoaDonCHITIET(View view) {
+     }
+
+     public void thanhToanHoaDon(View view) {
+     }
+ }
