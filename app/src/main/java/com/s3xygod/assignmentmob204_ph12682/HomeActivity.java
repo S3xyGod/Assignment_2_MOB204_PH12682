@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.s3xygod.assignmentmob204_ph12682.data.Sach;
+import com.s3xygod.assignmentmob204_ph12682.model.Sach;
 
 import java.util.ArrayList;
 
@@ -50,19 +50,10 @@ public class HomeActivity extends AppCompatActivity {
             txt_mem.setVisibility(View.VISIBLE);
         }
 
-        ArrayList<Sach> lstSach = new ArrayList<>();
-        Sach sach1 = new Sach(01, "Chi Pheo", "Van hoc", 50000);
-        Sach sach2 = new Sach(02, "Vu tru quang ta", "Khoa hoc", 90000);
-        Sach sach3 = new Sach(03, "Hinh hoc khong gian", "Toan hoc", 70000);
-        Sach sach4 = new Sach(04, "Top Notch 1", "Tieng Anh", 100000);
-        lstSach.add(sach1);
-        lstSach.add(sach2);
-        lstSach.add(sach3);
-        lstSach.add(sach4);
     }
 
     public void OpenListBooks(View view) {
-        Intent intent = new Intent(this, ListBooksActivity.class);
+        Intent intent = new Intent(this, ListTheLoaiActivity.class);
         startActivity(intent);
     }
 

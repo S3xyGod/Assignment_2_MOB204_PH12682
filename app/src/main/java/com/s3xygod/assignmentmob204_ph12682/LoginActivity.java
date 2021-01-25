@@ -10,15 +10,21 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.s3xygod.assignmentmob204_ph12682.SQLiteOpenHelper.MemberDAO;
+import com.s3xygod.assignmentmob204_ph12682.adapter.AdapterMem;
+import com.s3xygod.assignmentmob204_ph12682.model.Members;
+
 public class LoginActivity extends AppCompatActivity {
     private TextView user, password;
     private String id, pass, acc="", mk="";
     private CheckBox remember;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         user = findViewById(R.id.txt_id);
         password = findViewById(R.id.txt_pass);
         remember = findViewById(R.id.cb_remember);
@@ -64,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Sai tên tài khoản hoặc mật khẩu.\n " +
                     "\t\t\t\tVui lòng kiểm tra lại !", Toast.LENGTH_LONG).show();
         }
+
     }
 
     public void ForgotPass(View view) {
